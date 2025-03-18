@@ -1,8 +1,13 @@
-import { ensureAllElements } from "../../utils/utils";
+import { ensureAllElements } from "../utils/utils";
 
 const containerOrder = ensureElement<HTMLElement>('#order');
 const orderTemplate = ensureElement<HTMLTemplateElement>('#order-form');
 const templateCopy = cloneTemplate(orderTemplate);
+const button = ensureElement<HTMLButtonElement>('.button', containerOrder);
+
+button.addEventListener('click', () => {
+    this.events.emit('abc:button:click');
+});
 
 interface IOrder {
     email: string;
