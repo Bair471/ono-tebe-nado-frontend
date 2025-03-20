@@ -6,7 +6,7 @@ import { EventEmitter } from "./components/base/events";
 import { BasketComponent, basketTemplate } from './components/Basket';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { SuccessComponent, successTemplate } from './components/Success';
-import { OrderComponent } from './components/Order';
+import { OrderComponent, orderTemplate } from './components/Order';
 import { CardComponent, cardTemplate } from './components/Card';
 
 const testContainer = ensureElement<HTMLElement>('#test-section');
@@ -57,10 +57,10 @@ testContainer.append(success.render({
     h1: 'ABC'
 }));
 
-const newOrderComponent = new OrderComponent(abcContainer, events);
+const newOrderComponent = new OrderComponent(cloneTemplate(orderTemplate), events);
 testContainer.append(newOrderComponent.render({
     email: 'EMAIL',
-    phone: 'PHONE'
+    phone: 5
 }));
 
 events.on('successclick', () => {
