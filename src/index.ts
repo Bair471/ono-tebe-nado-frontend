@@ -1,8 +1,15 @@
 import './scss/styles.scss';
 
-import {AuctionAPI} from "./components/AuctionAPI";
-import {API_URL, CDN_URL} from "./utils/constants";
-import {EventEmitter} from "./components/base/events";
+import { AuctionAPI } from "./components/AuctionAPI";
+import { API_URL, CDN_URL } from "./utils/constants";
+import { EventEmitter } from "./components/base/events";
+import { BasketComponent, basketTemplate } from './components/Basket';
+import { cloneTemplate, ensureElement } from './utils/utils';
+import { SuccessComponent, successTemplate } from './components/Success';
+import { OrderComponent } from './components/Order';
+import { CardComponent, cardTemplate } from './components/Card';
+
+const testContainer = ensureElement<HTMLElement>('#test-section');
 
 const events = new EventEmitter();
 const api = new AuctionAPI(CDN_URL, API_URL);
@@ -39,3 +46,30 @@ api.getLotList()
     });
 
 
+const basketComponent = new BasketComponent(cloneTemplate(basketTemplate), events);
+testContainer.append(basketComponent.render({
+    list: 'LIST',
+    total: 10
+}));
+
+const success = new SuccessComponent(cloneTemplate(successTemplate), events);
+testContainer.append(success.render({
+    h1: 'ABC'
+}));
+
+const newOrderComponent = new OrderComponent(abcContainer, events);
+testContainer.append(newOrderComponent.render({
+    email: 'EMAIL',
+    phone: 'PHONE'
+}));
+
+events.on('successclick', () => {
+    console.log('HELLO BLA BLA BLA');
+});
+
+const cardComponent = new CardComponent(cloneTemplate(cardTemplate), events);
+testContainer.append(cardComponent.render({
+    image: 'LIST',
+    title: 'TITLE',
+    description: 'DESRIPTION'
+}));

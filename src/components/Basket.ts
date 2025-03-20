@@ -1,44 +1,37 @@
-const testContainer = ensureElement<HTMLElement>('#test-section');
-const abcTemplate = ensureElement<HTMLTemplateElement>('#abc');
-const abcContainer = cloneTemplate(abcTemplate);
+import { ensureElement } from "../utils/utils";
+import { Component } from "./base/Component";
+import { IEvents } from "./base/events";
 
-interface IAbc {
-    aaa: string;
-    bbb: string;
-    ccc: string;
+export const basketTemplate = ensureElement<HTMLTemplateElement>('#basket');
+
+interface IBasket {
+    list: string;
+    total: number;
 }
 
-class AbcComponent extends Component<IAbc> {
-    private events: IEvents;
-    private _aaa: HTMLElement;
-    private _bbb: HTMLElement;
-    private _ccc: HTMLElement;
+export class BasketComponent extends Component<IBasket> {
+
+    private _list: HTMLElement;
+    private _total: HTMLElement;
     constructor(container: HTMLElement, events: IEvents) {
         super(container);
 
-        this.events = events;
+        this._list = ensureElement<HTMLElement>('.basket__list', container);
+        this._total = ensureElement<HTMLElement>('.basket__total', container);
 
-        this._aaa = ensureElement<HTMLElement>('.aaa', container);
-        this._bbb = ensureElement<HTMLElement>('.bbb', container);
-        this._ccc = ensureElement<HTMLElement>('.ccc', container);
+        const button = ensureElement<HTMLButtonElement>('.button', container);
+
+        button.addEventListener('click', () => {
+            events.emit('actionbtn:button:click');
+        });
     }
 
-    set aaa(value: string) {
-        this.setText(this._aaa, value);
+    set list(value: string) {
+        this.setText(this._list, value);
     }
 
-    set bbb(value: string) {
-        this.setText(this._bbb, value);
-    }
-
-    set ccc(value: string) {
-        this.setText(this._ccc, value);
+    set total(value: number) {
+        this.setText(this._total, value);
     }
 }
 
-const abc = new AbcComponent(abcContainer, events);
-testContainer.append(abc.render({
-    aaa: 'AAA',
-    bbb: 'BBB',
-    ccc: 'CCC'
-}));

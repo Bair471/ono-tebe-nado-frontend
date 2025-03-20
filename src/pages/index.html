@@ -40,6 +40,10 @@
             <img class="hero__background" src="<%=require('../images/ligthning-decor.png')%>" alt=""/>
         </section>
 
+        <div id="test-section">
+
+        </div>
+
         <section class="catalog">
             <h2 class="catalog__title">Лоты</h2>
             <div  class="catalog__items" data-element="catalog" data-component="catalog"></div>
@@ -263,28 +267,28 @@
 </div>
 
     <template id="success">
-        <div class="state">
-            <img class="state__image" id="state__image" src="<%=require('../images/ready.svg')%>" />
+        <div class="state" id="state">
+            <img class="state__image" src="<%=require('../images/ready.svg')%>" />
             <h2 class="state__title">Покупка скоро будет у вас</h2>
             <p class="state__subtitle">Оформленные лоты удалены из корзины</p>
-            <button type="button" class="button state__action">На главную</button>
+            <button type="button" class="button state__action" id="button state__action">На главную</button>
         </div>
-    </template> 
+    </template>
 
-    <div id="order">
-        <form class="form" name="order" id="order-form">
+    <template id="order">
+        <form class="form" name="order">
             <label class="form__label">
-                <input name="email" type="email" class="form__input_email" placeholder="Email" />
+                <input name="email" type="email" class="form__input" placeholder="Email" />
             </label>
             <label class="form__label">
-                <input name="phone" type="text" class="form__input_phone" placeholder="+7 (" />
+                <input name="phone" type="text" class="form__input" placeholder="+7 (" />
             </label>
             <div class="form__footer">
                 <button type="submit" class="button">Оформить</button>
                 <span class="form__errors">Заполните поля</span>
             </div>
         </form>
-    </div>
+    </template>
 
     <template id="tabs">
         <nav class="tabs">
