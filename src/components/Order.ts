@@ -1,8 +1,8 @@
-import { cloneTemplate, ensureElement, formatNumber } from "../utils/utils";
+import { ensureElement, formatNumber } from "../utils/utils";
 import { Component } from "./base/Component";
 import { IEvents } from "./base/events";
 
-export const orderTemplate = ensureElement<HTMLTemplateElement>('#order-form');
+export const orderTemplate = ensureElement<HTMLTemplateElement>('#order');
 
 export interface IOrder {
     email: string;

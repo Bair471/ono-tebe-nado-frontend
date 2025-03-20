@@ -8,6 +8,8 @@ import { cloneTemplate, ensureElement } from './utils/utils';
 import { SuccessComponent, successTemplate } from './components/Success';
 import { OrderComponent, orderTemplate } from './components/Order';
 import { CardComponent, cardTemplate } from './components/Card';
+import { BidComponent, bidTemplate } from './components/Bid';
+import { AuctionComponet, auctionTemplate } from './components/Auction';
 
 const testContainer = ensureElement<HTMLElement>('#test-section');
 
@@ -73,3 +75,15 @@ testContainer.append(cardComponent.render({
     title: 'TITLE',
     description: 'DESRIPTION'
 }));
+
+const bidComponent = new BidComponent(cloneTemplate(bidTemplate), events);
+testContainer.append(bidComponent.render({
+    amount: 3,
+    status: 'STATUS'
+}));
+
+const auctionComponet = new AuctionComponet(cloneTemplate(auctionTemplate), events);
+testContainer.append(auctionComponet.render({
+    timer: 5,
+    text: 'TEXT'
+}))
