@@ -10,6 +10,7 @@ import { OrderComponent, orderTemplate } from './components/Order';
 import { CardComponent, cardTemplate } from './components/Card';
 import { BidComponent, bidTemplate } from './components/Bid';
 import { AuctionComponet, auctionTemplate } from './components/Auction';
+import { PreviewComponent, previewTemplate } from './components/Preview';
 
 const testContainer = ensureElement<HTMLElement>('#test-section');
 
@@ -73,7 +74,8 @@ const cardComponent = new CardComponent(cloneTemplate(cardTemplate), events);
 testContainer.append(cardComponent.render({
     image: 'LIST',
     title: 'TITLE',
-    description: 'DESRIPTION'
+    description: 'DESRIPTION',
+    status: 'STATUS'
 }));
 
 const bidComponent = new BidComponent(cloneTemplate(bidTemplate), events);
@@ -86,4 +88,11 @@ const auctionComponet = new AuctionComponet(cloneTemplate(auctionTemplate), even
 testContainer.append(auctionComponet.render({
     timer: 5,
     text: 'TEXT'
+}));
+
+const previewComponent = new PreviewComponent(cloneTemplate(previewTemplate), events);
+testContainer.append(previewComponent.render({
+    status: 'STATUS',
+    title: 'TITLE',
+    description: 'DESCRIPTIOM',
 }))
