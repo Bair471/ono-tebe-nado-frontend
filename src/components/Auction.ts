@@ -20,15 +20,16 @@ export class AuctionComponet extends Component<IAuction> {
         this._text = ensureElement<HTMLElement>('.lot__auction-text', container);
 
         const button = ensureElement<HTMLElement>('button', container);
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             events.emit('actionbtn:button:click');
         })
     }
-    set timer({ timer }: IAuction) {
-        this.setText(this._timer, formatNumber(timer));
+    set timer(value: number) {
+        this.setText(this._timer, formatNumber(value));
     }
 
-    set text(value: number) {
+    set text(value: string) {
         this.setText(this._text, value);
     }
 }

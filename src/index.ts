@@ -11,8 +11,14 @@ import { CardComponent, cardTemplate } from './components/Card';
 import { BidComponent, bidTemplate } from './components/Bid';
 import { AuctionComponet, auctionTemplate } from './components/Auction';
 import { PreviewComponent, previewTemplate } from './components/Preview';
+import { SoldComponet, soldTemplate } from './components/Sold';
+import { Modal } from './components/common/Modal';
+import { TabsComponent, tabsTemplate } from './components/Tabs';
+import { HeaderComponent } from './components/Header';
 
 const testContainer = ensureElement<HTMLElement>('#test-section');
+
+const modalContainer = ensureElement('#modal-container');
 
 const events = new EventEmitter();
 const api = new AuctionAPI(CDN_URL, API_URL);
@@ -36,6 +42,12 @@ events.onAll(({ eventName, data }) => {
 
 // Дальше идет бизнес-логика
 // Поймали событие, сделали что нужно
+const headerContainer = ensureElement('.header');
+const headerComponent = new HeaderComponent(headerContainer, events);
+headerComponent.render({
+    count: 10
+});
+
 
 
 // Получаем лоты с сервера
@@ -48,23 +60,35 @@ api.getLotList()
         console.error(err);
     });
 
-
+////////////BASKET
 const basketComponent = new BasketComponent(cloneTemplate(basketTemplate), events);
 testContainer.append(basketComponent.render({
     list: 'LIST',
     total: 10
 }));
 
-const success = new SuccessComponent(cloneTemplate(successTemplate), events);
-testContainer.append(success.render({
-    h1: 'ABC'
-}));
 
+
+////////////SUCCESS
+const success = new SuccessComponent(cloneTemplate(successTemplate), events);
+const a = success.render({
+    h1: 'ABC'
+})
+
+testContainer.append(a);
+
+const modal = new Modal(modalContainer, events);
+
+
+//////////newOrderComponent
 const newOrderComponent = new OrderComponent(cloneTemplate(orderTemplate), events);
-testContainer.append(newOrderComponent.render({
+const orderRender = newOrderComponent.render({
     email: 'EMAIL',
     phone: 5
-}));
+});
+
+testContainer.append(orderRender);
+
 
 events.on('successclick', () => {
     console.log('HELLO BLA BLA BLA');
@@ -90,9 +114,52 @@ testContainer.append(auctionComponet.render({
     text: 'TEXT'
 }));
 
+
+//////////////PREVIEW
 const previewComponent = new PreviewComponent(cloneTemplate(previewTemplate), events);
 testContainer.append(previewComponent.render({
     status: 'STATUS',
     title: 'TITLE',
     description: 'DESCRIPTIOM',
-}))
+}));
+
+
+//////////////SOLD
+const soldComponet = new SoldComponet(cloneTemplate(soldTemplate), events);
+const soldRender = soldComponet.render({
+    amount: 5,
+    status: 'STATUS'
+});
+
+
+/////////////TABS
+const tabsComponent = new TabsComponent(cloneTemplate(tabsTemplate), events);
+const tabsRender = tabsComponent.render({});
+
+
+events.on('tabs:active:clicked', () => {
+    const common = document.createElement('div');
+    common.append(tabsRender);
+    common.append(soldRender);
+    modal.render({content: common})
+});
+
+events.on('tabs:closed:clicked', () => {
+    const common = document.createElement('div');
+    common.append(tabsRender);
+    common.append(orderRender);
+    modal.render({content: common})
+});
+
+
+events.on('cart:clicked', () => {
+    const common = document.createElement('div');
+    common.append(tabsRender);
+    common.append(orderRender);
+    modal.render({content: common})
+});
+
+
+
+
+

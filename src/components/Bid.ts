@@ -18,17 +18,18 @@ export class BidComponent extends Component<IBid> {
         this._amount = ensureElement<HTMLElement>(`.bid__amount`, container);
         this._status = ensureElement<HTMLElement>(`.bid__status`, container);
 
-        const button = ensureElement<HTMLButtonElement>('.button', container);
+        const button = ensureElement<HTMLButtonElement>('.bid__open', container);
 
         button.addEventListener('click', () => {
             events.emit('actionbtn:button:click');
         });
     }
 
-    set status({ amount, status }: IBid) {
-        this.setText(this._amount, formatNumber(amount));
+    set amount(value: number) {
+        this.setText(this._amount, formatNumber(value));
+    }
 
-        if (status) this.setVisible(this._status);
-        else this.setHidden(this._status);
+    set status(value: string) {
+        this.setText(this._status, value);
     }
 }

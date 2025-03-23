@@ -278,10 +278,10 @@
     <template id="order">
         <form class="form" name="order">
             <label class="form__label">
-                <input name="email" type="email" class="form__input" placeholder="Email" />
+                <input name="email" type="email" class="form__input form__input_email" placeholder="Email" />
             </label>
             <label class="form__label">
-                <input name="phone" type="text" class="form__input" placeholder="+7 (" />
+                <input name="phone" type="text" class="form__input form__input_phone" placeholder="+7 (" />
             </label>
             <div class="form__footer">
                 <button type="submit" class="button">Оформить</button>
@@ -292,10 +292,10 @@
 
     <template id="tabs">
         <nav class="tabs">
-            <button name="active" class="button button_outline">Активные</button>
-            <button name="closed" disabled class="button button_outline">Закрытые</button>
+            <button name="active" class="button button_outline button_active">Активные</button>
+            <button name="closed" class="button button_outline button_close">Закрытые</button>
         </nav>
-    </template>
+        </template>
 
     <template id="basket">
         <div class="basket">
