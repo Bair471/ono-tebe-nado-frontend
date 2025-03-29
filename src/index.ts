@@ -220,21 +220,23 @@ const tabsComponent = new TabsComponent(cloneTemplate(tabsTemplate), events);
 
 events.on('tabs:active:clicked', () => {
     const tabsRender = tabsComponent.render({});
-    const soldRender = soldComponet.render({
-        amount: 5,
-        status: 'STATUS'
-    });
+    
     const common = document.createElement('div');
     common.append(tabsRender);
-    common.append(soldRender);
+    
     modal.render({ content: common })
 });
 
 events.on('tabs:closed:clicked', () => {
     const tabsRender = tabsComponent.render({});
+    const soldRender = soldComponet.render({
+        amount: 6,
+        status: 'STATUS'
+    });
 
     const common = document.createElement('div');
     common.append(tabsRender);
+    common.append(soldRender);
     modal.render({ content: common })
 });
 
