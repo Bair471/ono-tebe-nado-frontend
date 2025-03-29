@@ -1,31 +1,31 @@
-import { ensureElement, formatNumber } from "../utils/utils";
-import { Component } from "./base/Component";
+import { ensureElement } from "../utils/utils";
 import { IEvents } from "./base/events";
+import { Form } from "./common/Form";
 
 export const orderTemplate = ensureElement<HTMLTemplateElement>('#order');
 
 export interface IOrder {
-   
+   email: string;
+   phone: string;
 }
 
-export class OrderComponent extends Component<IOrder> {
+export class OrderComponent extends Form<IOrder> {
+    _email: HTMLInputElement;
+    _phone: HTMLInputElement;
+    constructor(container: HTMLFormElement, events: IEvents) {
+        super(container, events);
 
-    constructor(container: HTMLElement, events: IEvents) {
-        super(container);
+        this._email = ensureElement<HTMLInputElement>('.form__input_email', container);
 
-        const emailInput = ensureElement<HTMLInputElement>('.form__input_email', container);
-        emailInput.addEventListener('change', function (e) {
-            console.log(e.target);
-        })
-        
-        const phoneInput = ensureElement<HTMLInputElement>('.form__input_phone', container);
-        phoneInput.addEventListener('change', function (e) {
-            console.log(e.target);
-        })
-       
-        const button = ensureElement<HTMLButtonElement>('.button', container);
-        button.addEventListener('click', () => {
-            events.emit('actionbtn:button:click');
-        });
+        this._phone = ensureElement<HTMLInputElement>('.form__input_phone', container);
     }
+
+    set email(value: string) {
+        this.setText(this._email, value);
+    }
+
+    set phone(value: string) {
+        this.setText(this._phone, value);
+    }
+
 }

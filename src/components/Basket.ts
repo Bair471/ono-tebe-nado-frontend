@@ -22,7 +22,7 @@ export class BasketComponent extends Component<IBasket> {
         const button = ensureElement<HTMLButtonElement>('.button', container);
 
         button.addEventListener('click', () => {
-            events.emit('actionbtn:button:click');
+            events.emit('basket:button:click');
         });
     }
 

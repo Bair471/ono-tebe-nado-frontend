@@ -19,9 +19,9 @@ export class SoldComponet extends Component<ISold> {
         this._amount = ensureElement<HTMLElement>('.bid__amount', container);
         this._status= ensureElement<HTMLElement>('.bid__status', container);
         const button = ensureElement<HTMLElement>('.bid__selector-input', container);
-        // button.addEventListener('change', function () {
-        //     console.log(this.checked);
-        // })
+        button.addEventListener('change', function () {
+                events.emit('sold:button:click'); ///////???????
+        });
 
     }
     set amount(value: number) {

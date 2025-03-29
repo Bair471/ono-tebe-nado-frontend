@@ -21,7 +21,7 @@ export class BidComponent extends Component<IBid> {
         const button = ensureElement<HTMLButtonElement>('.bid__open', container);
 
         button.addEventListener('click', () => {
-            events.emit('actionbtn:button:click');
+            events.emit('bid:button:click');
         });
     }
 

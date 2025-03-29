@@ -39,14 +39,9 @@
             <p class="hero__description">Аукцион вещей, в которые никто не верил</p>
             <img class="hero__background" src="<%=require('../images/ligthning-decor.png')%>" alt=""/>
         </section>
-
-        <div id="test-section">
-
-        </div>
-
         <section class="catalog">
             <h2 class="catalog__title">Лоты</h2>
-            <div  class="catalog__items" data-element="catalog" data-component="catalog"></div>
+            <div  class="catalog__items" data-element="catalog" data-component="catalog" id="lots-container"></div>
         </section>
 
         <section class="about">
@@ -371,15 +366,23 @@
     </template>
 
     <template id="card">
-        <article class="catalog_item card">
+        <!-- <article class="catalog_item card">
             <img class="card__image" src="<%=require('../images/lot1.jpg')%>" alt=""/>
             <div class="card__content">
                 <h1 class="card__title"></h1>
-                <p class="card__description"></p>
+                <p class="card__about"></p>
             </div>
             <div class="card__foot">
                 <button class="card__action button">Сделать ставку</button>
                 <span class="card__status"></span>
+            </div>
+        </article> -->
+        <article class="card">
+            <img class="card__image" src="<%=require('../images/lot1.jpg')%>" alt=""/>
+            <div class="card__status"></div>
+            <div class="card__content">
+                <h1 class="card__title"></h1>
+                <p class="card__description"></p>
             </div>
         </article>
     </template>
